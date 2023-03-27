@@ -1,10 +1,20 @@
 import { useState } from 'react';
-const Login = () => {
+import { useNavigate } from 'react-router-dom';
+
+const Login = ({setUser}) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // If there is no name or no email then do nothing
+    if(name.trim().length === 0 || email.trim().length === 0) {
+      return
+    } else {
+      setUser({name, email})
+      navigate('/dashboard')
+    }
   };
 
   return (
